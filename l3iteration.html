@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Iteration</title>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            
+            // =>Array Call Back Method 
+
+            // forEach 
+            // map 
+            // filter 
+            // find 
+            // reduce 
+            // some 
+            // every 
+
+            // for(let x=0; x < array.length; x++){
+                // code to be executed 
+            // }
+
+            // for(let key in obj){
+            //     code to be executed 
+            // }
+
+            // for(let value of array){
+            //     code to be executed 
+            // }
+
+            document.write("<h3>For Loop</h3>");
+
+            let mycolors = ["red", "green", "blue", "orange", "grey"];
+
+            for(let x=0; x < mycolors.length; x++){
+                document.write(mycolors[x] + "<br/>");
+            }
+
+            document.write("<h3>For In Loop</h3>"); // For object / array 
+
+            let customers = {
+                name:"Aung Aung",
+                city:"Mandalay",
+                parent:"U Ba",
+                phone:"0123456789"
+            };
+
+            // console.log(customers);
+            // console.log(customers.name);
+            // console.log(customers['name']);
+
+            for(let key in customers){
+                // console.log(key);
+                // console.log(customers.key); //undefined
+                // console.log(customers['key']); 
+                document.write(key + " = " +customers[key] + "<br/>");
+            }
+
+            const ourteams = ["kyaw kyaw", "aung aung", "kaung kaung"];
+
+            for(idx in ourteams){
+                // console.log(idx);
+
+                document.write("for in loop result = "+ ourteams[idx] + "<br/>");
+            }
+
+            document.write("<h3>For Of Loop</h3>"); // for array 
+
+            const members = ["su su", "lu lu", "nu nu", "yu yu"];
+
+            for(let member of members){
+                // console.log(member);
+
+                document.write("for of loop result = "+ member + "<br/>");
+            }
+
+            document.write("<h3>forEach Loop</h3>");
+
+            const students = ["su su","lu lu","nu nu","yu yu","phu phu"];
+
+            students.forEach(student=>{
+                // console.log(student);
+                document.write("forEach loop result = " + student + "<br/>");
+            });
+
+            const colors = ["red","green","blue","white","black"];
+
+            colors.forEach((color,idx)=>{
+                // console.log(`Index number is = ${idx} Color is = ${color}`);
+                document.write(`Index number is = ${idx} Color is = ${color} <br/>`);
+            });
+
+            document.write("<h3>map Loop</h3>");
+
+            const employees = ["su su","lu lu","nu nu","yu yu","phu phu"];
+
+            employees.map(employee=>{
+                // console.log(employee); // string
+                document.write("map loop result = " + employee + "<br/>");
+
+            });
+
+            const ladies = employees.map((employee,idx)=>{
+                return `${++idx} Ms.${employee}`;
+            });
+
+            console.log(ladies); //['1 Ms.su su', '2 Ms.lu lu', '3 Ms.nu nu', '4 Ms.yu yu', '5 Ms.phu phu']
+
+            const visitors = ["ko sai","m zaw naw","june","htet aung kyaw","paing sis"];
+
+            const guys = visitors.map(visitor=>`Mr.${visitor}`);
+            console.log(guys);//(5) ['Mr.ko sai', 'Mr.m zaw naw', 'Mr.june', 'Mr.htet aung kyaw', 'Mr.paing sis']
+
+
+
+
+            visitors.forEach(visitor=>{
+                console.log(`forEach result = Mr.${visitor}`); //string
+            });
+
+            // can't set!!! forEach not working
+            // const peoples = visitors.forEach(visitor=>{
+            //     return `Mr.${visitor}`;
+            // });
+
+            // console.log(peoples); //undefined
+
+            const employers = ["su su","lu lu","nu nu","yu yu","phu phu"];
+
+            const arrs1 = employers.map(employer=>{
+                return employer;
+            });
+
+            const arrs2 = arrs1.filter(owner=>{
+                if(owner === "nu nu"){
+                    return false;
+                }else{
+                    return true;
+                }
+            });
+
+            console.log(arrs2);
+
+            console.log(arrs1);
+
+            const owners = employers.map(employer=>{
+                return employer;
+            }).filter(owner=>{
+
+                // if(owner === "nu nu"){
+                //     return false;
+                // }else{
+                //     return true;
+                // }
+
+                
+                if(owner === "nu nu"){
+                    return false;
+                }
+                return true;
+                
+
+            });
+
+            console.log(owners);
+
+            const firstnames = ["aung","kyaw","soe"];
+            
+            const name1 = firstnames.map((firstname)=>{
+                return `${firstname} ko ko`;
+            });
+            console.log(name1);
+
+            const name2 = firstnames.map(firstname=>{
+                return `${firstname} hla`;
+            });
+            console.log(name2);
+
+            const name3 = firstnames.map(firstname=>`${firstname} lwin`);
+            console.log(name3);
+
+            const name4 = firstnames.map(()=>`su su`); // (3) ['su su', 'su su', 'su su']
+            console.log(name4);
+
+            const sport = "bike";
+            const contestants = ["aung aung","kyaw kyaw","maung maung","tun tun","linn linn"];
+
+            const winners = contestants.map((contestant,idx)=>({
+                name: contestant,
+                // game: sport,   // game: 'bike'
+                sport,            // sport: 'bike'
+                prize: ++idx
+            }));
+
+            console.log(winners);
+
+            document.write("<h3>Filter</h3>");
+
+            const ages = [20,25,21,17,35,16,50,17,11,80,10,18,12,15,37];
+
+            const getover18 = ages.filter(age=>{
+                return age > 18;
+            });
+
+            // console.log(getover18);
+            document.write("filter result = "+ getover18 + "<br/");
+
+            const getover20 = ages.filter(age=>age >= 20);
+            console.log(getover20);
+        
+
+        </script>
+
+    </body>
+</html>
