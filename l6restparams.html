@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rest Parameter / Rest Operator</title>
+    </head>
+    <body>
+
+        <script type="text/javascript"> 
+
+        // Rest Parameter (...)
+        // Note : can't set first and between 
+                // : can contain just one rest parameter 
+            function city(val){
+                return val;
+            }
+
+            console.log(city()); // undefined 
+            console.log(city('yangon')); // yangon
+            console.log(city('yangon','mandalay','bago')); // yangon
+
+            function country(...vals){
+                return vals;
+            }
+
+            console.log(country('myanmar')); // ['myanmar']
+            console.log(country('myanmar','thailand','indonesia')); // (3) ['myanmar', 'thailand', 'indonesia']
+
+            function place(location,...vals){
+                // return location; // chaung tar
+                return vals; // (2) ['ngapali', 'Ngwesaung']
+            }
+
+            console.log(place('chaung tar','ngapali','Ngwesaung'));
+
+            let animal = new Function('...vals','return vals');
+            console.log(animal('cat','dog','fish'));// (3) ['cat', 'dog', 'fish']
+
+            
+            // 17RP
+
+            function sumresult(...nums){
+                let total = 0;
+
+                for(const num of nums){
+                    total += num;
+                }
+
+                return total;
+            }
+
+            console.log(sumresult(10,20,30,40,50));
+            console.log(sumresult([10,20,30,40,50]));
+
+            // continue...
+
+
+
+        </script>
+    </body>
+</html>
+
