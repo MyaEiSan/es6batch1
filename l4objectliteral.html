@@ -199,6 +199,60 @@
         console.log(grandtotal5({total:3000,servicefee:200})); //3800
         console.log(grandtotal5()); //1300
 
+        const item = "Redbull Energy Drink";
+        const type = "Can";
+
+        const iteminfo = {
+            item:item,
+            type,
+            myfun:function(){
+                return "hello world";
+            },
+            madeby(country){
+                return `this product is mady by ${country}`;
+            }
+
+        };
+
+        console.log(iteminfo);
+        console.log(iteminfo.item);
+        console.log(iteminfo["type"]);
+        console.log(iteminfo.myfun());
+        console.log(iteminfo.madeby('thailand'));
+
+        const name1 = "Aung Aung";
+        const name2 = "Su Su";
+        const title = "New Task";
+        const position = "Finance Officer";
+        const role = "Located";
+        const department = "Accounting Room";
+
+        const job = {
+            name:name1,
+            title:position
+        };
+
+        console.log(job);//{name: 'Aung Aung', title: 'Finance Officer'}
+        console.log(job["Aung Aung"]);// [name1]:name1, Oki , but, don't do 
+
+        const assigns = {};
+        assigns['fullname'] = name1; 
+        assigns[title] = position; 
+        assigns[role] = department; 
+
+        console.log(assigns); //{fullname: 'Aung Aung', New Task: 'Finance Officer', Located: 'Accounting Room'}
+
+        const tasks = {
+            ['fullname']: name2, 
+            [title]: position, 
+            [role]:department,
+            [1+2+3]:'result'
+        }
+        console.log(tasks);
+        console.log(tasks.fullname); //Su Su
+        // console.log(tasks.6); //error don't do 
+        console.log(tasks[6]); //result , dont't do 
+
 
 
         </script>

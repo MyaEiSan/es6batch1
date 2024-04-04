@@ -77,11 +77,31 @@
         console.log(totalresult(...amounts));
         console.log(totalresult(...[10,20,30,40,50]));
 
+        // Error 
+        // function sumresult(){
+        //     let sum = arguments.reduce((total,curr)=>(total+curr),0); 
+
+        //     return sum;
+        // }
+
+        // console.log(sumresult(10,20,30,40,50));
+
+        function sumresult(){
+            let sum = Array.from(arguments);
+            let result = sum.reduce((total,curr)=>(total += curr),0);
+            return result;
+        }
+
+        console.log(sumresult(10,20,30,40,50));
+
+
+
 
 
         </script>
     </body>
 </html>
 
+<!-- 11AO -->
 
 <!-- 24AO -->

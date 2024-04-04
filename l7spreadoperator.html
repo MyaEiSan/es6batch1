@@ -132,8 +132,57 @@
         console.log(bios);//{0: 'M', 1: 'y', 2: 'a', 3: 'n', 4: 'm', 5: 'a', 6: 'r', nickname: 'Honey', age: 22, name: 'Honey Nway Oo', gender: 'Female'}
 
 
-        
+        const students = [..."hello",{name: "aung aung"}];
+        console.log(students);
 
+        const persons = {
+            name: "Tun Tun",
+            gender: "Male",
+            age: 22
+        };
+
+        const phone = "09111111";
+        const country = "Myanmar";
+        const key1 = "nickname";
+        const key2 = "favcolor";
+
+        const customers = {
+            ...persons,
+            hascar: true,
+            tel: phone,
+            country: country,
+            [key1]: "Mg Tun",
+            [key2]: "black"
+        }
+
+        // variable တွေကို key အနေနဲ့သိစေချင်တဲ့အခါ [] ထဲမှာ ထည့်ပေးရမယ် react မှာလည်း အသုံးများတယ်။
+
+        console.log(customers);
+
+
+        const keyassign = (obj,key,val)=>{
+
+            const getobj = obj;
+            getobj[key] = val;
+            console.log(getobj); //
+
+            const takeobj = {
+                ...obj
+            };
+            takeobj[key] = val;
+            console.log(takeobj); //{name: 'Tun Tun', gender: 'Male', age: 22, hascar: true, tel: '09111111', …}
+
+            const setobj = {
+                ...obj,
+                [key]:val
+            }
+
+            console.log(setobj); //{name: 'Tun Tun', gender: 'Male', age: 22, hascar: true, tel: '09111111', …}
+        }
+
+        keyassign(customers,"job","Developer");//{name: 'Tun Tun', gender: 'Male', age: 22, hascar: true, tel: '09111111', …}
+        
+// 25OP
         </script>
     </body>
 </html>
