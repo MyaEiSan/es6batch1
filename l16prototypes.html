@@ -156,6 +156,47 @@
             
             // 24OP
 
+
+            function Vehicle(brand){
+                this.brand = brand; 
+                this.like = function(){
+                    return `i like ${this.brand}`;
+                }
+            }
+
+            const getobj3 = new Vehicle("suzuki");
+
+            console.log(getobj3); 
+            console.log(getobj3.brand);
+            console.log(getobj3.like()); 
+
+            // Method 2 
+            const getobj4 = new Vehicle.prototype.constructor("mazada"); 
+            console.log(getobj4); 
+            console.log(getobj4.brand); 
+            console.log(getobj4.like()); 
+
+            const getobj4keys = Object.keys(getobj4); 
+            console.log(getobj4keys); 
+
+            for(let key in getobj4) console.log(key); 
+
+            if(getobj4.hasOwnProperty('brand')){
+                console.log("Yes"); //Yes
+            }else{
+                console.log("No");
+            }
+
+            if(getobj4.hasOwnProperty('like')){
+                console.log("Yes"); //Yes
+            }else{
+                console.log("No");
+            }
+
+
+
+
+
         </script>
         
     </body>
