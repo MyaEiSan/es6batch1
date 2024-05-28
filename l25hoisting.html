@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hoisting ( do and don't )</title>
+    </head>
+    <body>
+
+
+        <script type="text/javascript">
+
+        myfunone();
+
+        // => Function Declaration 
+
+        function myfunone(){
+            console.log("my fun one");
+        }
+
+        myfunone(); 
+
+        // myfuntwo(); // Error, Cannot access 'myfuntwo' before initialization
+
+        // => Function Expression 
+
+        const myfuntwo = function(){
+            console.log("my fun two");
+        }
+
+        myfuntwo(); 
+
+
+        // => Class Declaration 
+
+        // const seasonobj1 = new Seasonone(); //l25hoisting.html:34 Uncaught ReferenceError: Cannot access 'Seasonone' before initialization 
+        // console.log(seasonobj1);
+
+        class Seasonone{
+            constructor(){
+                this.info = "this is season one";
+            }
+        }
+
+        const seasonobj1 = new Seasonone(); 
+        console.log(seasonobj1);
+
+        // Class Expression 
+        // const seasonobj2 = new Seasontwo(); // l25hoisting.html:47 Uncaught ReferenceError: Cannot access 'Seasontwo' before initialization
+        // console.log(seasonobj2);
+
+
+        const Seasontwo = class{
+            constructor(){
+                this.info = "this is season two";
+            }
+        }
+
+        const seasonobj2 = new Seasontwo();
+        console.log(seasonobj2);
+
+
+
+        </script>
+        
+    </body>
+</html>

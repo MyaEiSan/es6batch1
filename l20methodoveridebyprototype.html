@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Method Overiding by Prototype</title>
+    </head>
+    <body>
+
+
+        <script type="text/javascript">
+
+            function Vehicle(color){
+                this.color = color;
+            }
+
+            Vehicle.prototype.vancar = function(){
+                return "this is vancar";
+            }
+
+            // custom reuseable function 
+            function extend(Parent, Child){
+                Child.prototype = Object.create(Parent.prototype);
+                Child.prototype.constructor = Child;
+            }
+
+            function Bike(brand, colour){
+                Vehicle.call(this, colour); 
+                this.brand = brand;
+            }
+
+            extend(Vehicle,Bike);
+
+            Bike.prototype.ebike = function(){
+                return "this is ebike";
+            }
+
+            Bike.prototype.vancar = function(){
+                return "this is ecar = method override by bike";
+            }
+
+            function Boat(brand, colour){
+                Vehicle.call(this, colour);
+                this.brand = brand;
+            }
+
+            extend(Vehicle,Boat); 
+
+            Boat.prototype.eboat = function(){
+                return "this is eboat";
+            }
+
+            const vehicle = new Vehicle("black");
+            const bike =  new Bike('marin', 'red');
+            const boat = new Boat('see ray', 'green');
+
+            console.log(vehicle);
+            console.log(vehicle.color); // black 
+            console.log(vehicle.vancar()); // this is vancar 
+
+            console.log(bike);
+            console.log(bike.brand); //marin 
+            console.log(bike.ebike()); // this is ebike 
+
+            // after inheritance 
+            console.log(bike.vancar()); //this is ecar = method override by bike
+            console.log(bike.color); //
+
+            console.log(boat);
+            console.log(boat.brand); //see ray
+            console.log(boat.eboat());//this is eboat
+
+            // after inheritance 
+            console.log(boat.vancar()); //this is vancar
+            console.log(boat.color); //green
+
+            console.log(vehicle.vancar()); //this is vancar
+
+            console.log(vehicle.color); // black
+
+
+            // Polymorphism 
+
+            const vehicles = [
+                new Bike("margin", "red"), 
+                new Boat("sea ray", "green")
+            ];
+
+            for(let vehicle of vehicles){
+                console.log(vehicle.vancar());
+            }
+         
+
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>this Keyword and usestrict</title>
+    </head>
+    <body>
+
+
+        <script type="text/javascript">
+
+        'use strict'; // restrict global window object 
+
+        const Phone = function(){
+            this.brand = function(){
+                console.log(this);
+            }
+        }
+
+        const obj1 = new Phone(); 
+        console.log(obj1);
+
+        // Method Call 
+        obj1.brand();//Phone {brand: ƒ}
+
+        // Function Call ( Now this is no longer point out to global object )
+        const getbrand = obj1.brand;
+        getbrand();// undefined
+
+
+        </script>
+        
+    </body>
+</html>

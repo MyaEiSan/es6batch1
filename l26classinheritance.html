@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Class Inheritance</title>
+    </head>
+    <body>
+
+
+        <script type="text/javascript">
+
+            // => Class Inheritance ( Note : Extending data and methods from another class )
+            
+            class Person{
+                constructor(firstname,lastname,city){
+                    this.firstname = firstname; 
+                    this.lastname = lastname;
+                    this.location = city;
+                }
+
+                getfullname = title=>{
+                    return `${title}.${this.firstname} ${this.lastname}`;
+                }
+            }
+
+            class Position extends Person{
+                jobtitle = title=>{
+                    return `${title}`;
+                }
+            }
+
+            const obj1 = new Person("Aung","Tun Tun","Yangon");
+            console.log(obj1);
+            console.log(obj1.firstname,obj1.lastname);
+            console.log(obj1.location);
+
+            const obj2 = new Position("Yu Yu","Aye","Mandalay");
+            console.log(obj2);
+            console.log(obj2.firstname,obj2.lastname);
+            console.log(obj2.location);
+            console.log(obj2.jobtitle("Manager"));
+
+            class Car{
+                constructor(brand,color){
+                    this.brand = brand;
+                    this.color = color;
+                }
+            }
+
+            Car.prototype.summerize = function(){
+                return `Brand is ${this.brand} and color is ${this.color}`;
+            }
+
+            const obj3 = new Car("toyota","white");
+            console.log(obj3);
+            console.log(obj3.brand);
+            console.log(obj3.color);
+            console.log(obj3.summerize()); // Brand is toyota and color is white
+
+            // => Super Constructor 
+
+            class Phone{
+
+                constructor(brand){
+                    this.brand = brand;
+                }
+
+                madeby(val){
+                    return `${val} made`;
+                }
+            }
+
+            class Mobile extends Phone{
+
+                constructor(brand,network,price){
+                    super(brand);
+                    this.network = network; 
+                    this.price = price;
+                }
+
+                color(val){
+                    return `${val} color`;
+                }
+            }
+
+            const obj4 = new Mobile("Sony","5G","USD 2000"); 
+            console.log(obj4);
+            console.log(obj4.brand);
+            console.log(obj4.madeby("Japan"));
+            console.log(obj4.color("Titanium"));
+        
+        </script>
+        
+    </body>
+</html>
