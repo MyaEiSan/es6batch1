@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reflect</title>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+
+            // Reflect.construct(classobj,[parameter])
+            // class က parameter မတောင်းလည်း [] အလွတ်လေး လေးထည့်ပေးရမယ် 
+
+            class Person{
+                constructor(name){
+                    this.name = name;
+                }
+            }
+
+            let objperson = Reflect.construct(Person,["Aung Kyaw"]); 
+            console.log(objperson);  //Person {name: 'Aung Kyaw'}
+
+            let person = new Person("Su Su"); 
+            console.log(person); // Person {name: 'Su Su'}
+
+            console.log(Reflect.getPrototypeOf(person) === Person.prototype); // true 
+
+            // => Reflect.setPrototypeOf(classobj,objvalue)
+
+            Person.prototype.city = "Yangon"; 
+            console.log(Reflect.getPrototypeOf(person)); // {city: 'Yangon'}
+
+            let setage = {
+                age: 18
+            }; 
+
+            Reflect.setPrototypeOf(person, setage); 
+            console.log(Reflect.getPrototypeOf(person)); // {age: 18}
+
+            // => Reflext.apply(classobj.method,parameterbyobj, parameterbyarray)
+
+            class Student{
+                constructor(name,age){
+                    this.name = name;
+                    this.age = age;
+                }
+
+                greeting(prefix){
+                    console.log(`Hello ${prefix} , I am `+ this.name + ` i am ${this.age} years old.`)
+                }
+            }
+
+            let objstudent = Reflect.construct(Student,['Yu Yu',25]); 
+            console.log(objstudent); // Student {name: 'Yu Yu', age: 25}
+            console.log(objstudent.name); // Yu Yu
+            console.log(objstudent.age);  // 25
+
+            Reflect.apply(objstudent.greeting,{name:"Zaw Zaw",age:15},['Sir']); // Hello Sir , I am Zaw Zaw i am 15 years old.
+
+
+            // => Exercise constructor() and apply() 
+
+            class Phone{
+                constructor(){
+                    this.brand = "iPhone"; 
+                }
+            }
+
+            let objphone = Reflect.construct(Phone,[]); 
+            console.log(objphone); // Phone {brand: 'iPhone'}
+            console.log(objphone.brand); // iPhone 
+
+            let setphone = {
+                model: "16 Pro Max", 
+                price(){
+                    console.log("Price is 1300 USD");
+                }
+            }
+
+            let phone = new Phone(); 
+
+            Reflect.setPrototypeOf(phone,setphone); 
+            console.log(Reflect.getPrototypeOf(phone)); // {model: '16 Pro Max', price: ƒ}
+            Reflect.apply(phone.price,null,[]); // Price is 1300 USD
+
+
+            Reflect.setPrototypeOf(objphone,setphone); 
+            console.log(Reflect.getPrototypeOf(objphone)); // {model: '16 Pro Max', price: ƒ}
+            Reflect.apply(objphone.price,null,[]); // Price is 1300 USD
+
+
+
+
+            // => get(classobj, property) set ()
+
+            class Vehicle {
+
+                constructor(brand, color){
+                    this.brand = brand; // must be start with underscore 
+                    this.color = color; 
+                }
+
+                // get() set() သုံးမယ်ဆိုရင် property name ကို _ နဲ့စရမယ်။
+
+                get brand(){
+                    return this._brand;
+                }
+
+                set brand(val){
+                    this._brand = val;
+                }
+            }
+
+            let vehicle = new Vehicle('Toyota', 'Red'); 
+            console.log(vehicle); // Vehicle {_brand: 'Toyota', color: 'Red'}
+
+            // ပြန်ရယူတဲ့အခါ _ ထည့်လည်းရတယ်မထည့်လည်းရတယ်။
+
+            console.log(Reflect.get(vehicle,'brand')); // Toyota
+            console.log(Reflect.get(vehicle,'_brand')); // Toyota
+
+            // _မပါတဲ့ property ကိုတော့ _နဲ့ ခေါ်လို့မရဘူး 
+            console.log(Reflect.get(vehicle,'color')); // Red
+            console.log(Reflect.get(vehicle,'_color')); // undefined
+
+            Reflect.set(vehicle,'brand','Suzuki');
+            console.log(Reflect.get(vehicle,'brand')); // Suzuki
+
+            Reflect.set(vehicle,'_brand','Mazda');
+            console.log(Reflect.get(vehicle,'_brand')); // Mazada
+
+            Reflect.set(vehicle,'color','Green');
+            console.log(Reflect.get(vehicle,'color')); // Green
+
+
+
+
+
+            let objvehicle = Reflect.construct(Vehicle, ["Mazda","Steelblue"]); 
+            console.log(objvehicle); // Vehicle {_brand: 'Toyota', color: 'Red'}
+
+            console.log(Reflect.get(objvehicle,'brand')); // Mazda
+            console.log(Reflect.get(objvehicle,'_brand')); // Mazda
+
+            console.log(Reflect.get(objvehicle,'color')); // Steelblue
+            console.log(Reflect.get(objvehicle,'_color')); // undefined
+
+            Reflect.set(objvehicle,'brand','Suzuki');
+            console.log(Reflect.get(objvehicle,'brand')); // Suzuki
+
+            Reflect.set(objvehicle,'_brand','Honda');
+            console.log(Reflect.get(objvehicle,'_brand')); // Honda
+
+            Reflect.set(objvehicle,'color','Violet');
+            console.log(Reflect.get(objvehicle,'color')); // Violet
+
+
+            // => ownKeys() and has() 
+
+            console.log(Reflect.ownKeys(vehicle)); // (2) ['_brand', 'color']
+            console.log(Reflect.ownKeys(objvehicle)); // (2) ['_brand', 'color']
+
+            console.log(Reflect.has(vehicle,'brand')); //true
+            console.log(Reflect.has(objvehicle,'brand')); //true
+            console.log(Reflect.has(vehicle,'_brand')); //true
+            console.log(Reflect.has(objvehicle,'_brand')); //true
+
+            console.log(Reflect.has(vehicle,'color')); //true
+            console.log(Reflect.has(objvehicle,'_color')); //true
+
+
+            // => Create Property defineProperty(classObject, property,obj)
+
+            Reflect.defineProperty(vehicle,'model',{
+                writable: true, 
+                value: "Toyota Crown"
+            });
+
+            console.log(vehicle); //Vehicle {_brand: 'Mazda', color: 'Green', model: 'Toyota Crown'}
+            console.log(Reflect.get(vehicle,'model')); // Toyota Crown
+            console.log(vehicle.model); // Toyota Crown 
+
+            Reflect.defineProperty(vehicle,'feature',{
+                writable: true, 
+                value: ["autodrive", "360camera"]
+            }); 
+
+            console.log(vehicle); //Vehicle {_brand: 'Mazda', color: 'Green', model: 'Toyota Crown', feature: Array(2)}
+            console.log(Reflect.get(vehicle, 'feature')); //(2) ['autodrive', '360camera']
+            console.log(vehicle.feature); // (2) ['autodrive', '360camera']
+
+            vehicle.feature = ["manualdrive"]; 
+            console.log(Reflect.get(vehicle,'feature')); // ['manualdrive']
+
+            Reflect.defineProperty(vehicle,'price',{
+                value: "10000 USD"
+            });
+
+            // writable default = false 
+
+            console.log(Reflect.get(vehicle,'price')); // 10000 USD
+
+
+
+            vehicle.price = "5000 USD"; 
+            
+            console.log(Reflect.get(vehicle,'price')); // 10000 USD
+
+
+            Reflect.defineProperty(vehicle,'engine',{
+                writable: true, 
+                value: 'EV Car'
+            }); 
+
+            console.log(Reflect.get(vehicle,'engine')); // EV Car
+
+            // => Preventing and Extensions 
+
+            console.log(Reflect.isExtensible(vehicle)); // true 
+
+            // property ထပ်တိုးလို့ မရအောင်လုပ်တာ 
+            Reflect.preventExtensions(vehicle); 
+
+            console.log(Reflect.isExtensible(vehicle)); // false  
+
+            Reflect.defineProperty(vehicle,'productionyear',{
+                writable: true, 
+                value: '2024'
+            }); 
+
+            console.log(Reflect.get(vehicle,'productionyear')); // undefined  
+
+        </script>
+    </body>
+</html>
+
+<!-- 5FN  -->

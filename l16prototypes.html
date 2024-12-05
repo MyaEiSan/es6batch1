@@ -62,6 +62,44 @@
             console.log(person);//{city: 'yangon', age: 20, phone: '012345'}
             console.log(Object.keys(person));
 
+            // =>enumerable : true 
+
+            const myobj = {}; 
+
+            Object.defineProperty(myobj,'enumerableProperty',{
+                value: "I am Bot", 
+                enumerable: true
+            }); 
+
+            for(let key in myobj){
+                console.log(key); // enumerableProperty
+            } 
+
+            console.log(Object.keys(myobj)); 
+            console.log(JSON.stringify(myobj));
+
+            // =>enumerable : false 
+
+            const yourobj = {}; 
+
+            Object.defineProperty(yourobj,'enumerableProperty',{
+                value: "I am Bot", 
+                enumerable: false
+            }); 
+
+            console.log(yourobj);
+
+            for(let key in yourobj){
+                console.log(key); // enumerableProperty
+            } 
+
+            console.log(Object.keys(yourobj)); 
+            console.log(JSON.stringify(yourobj));
+
+
+
+
+
             // => Instance Members vs Prototype Members 
 
             function Phone(brand){

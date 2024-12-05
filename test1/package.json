@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7"
+  },
+  "scripts": {
+   "build": "babel index.js -o output/index.js",
+   "watch": "babel index.js -o output/index.js --watch"
+  },
+
+"babel":{
+    "presets":["@babel/preset-env"]
+  }
+}
